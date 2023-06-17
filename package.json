@@ -1,19 +1,41 @@
 {
-  "dependencies": {
-    "canvas": "^1.6.12",
-    "request": "^2.88.0"
-  },
-  "name": "nodejs-meme-generator",
-  "version": "1.0.5",
-  "description": "Nodejs promise-based meme generator, it takes an image as url and top/bottom text to generate meme as Buffer",
-  "main": "index.js",
-  "devDependencies": {},
+  "name": "memise",
+  "version": "2.0.0",
+  "description": "TS promise-based meme generator, it takes an image as url and top/bottom text to generate meme as Buffer",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "watch": "tsc -w",
+    "format": "prettier --write \"./**/*.ts\" \"./**/*.js\"",
+    "lint": "eslint .",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
+  "files": [
+    "dist/**/*"
+  ],
   "repository": {
     "type": "git",
-    "url": "TehZarathustra/nodejs-meme-generator"
+    "url": "https://github.com/PolarWooolf/meme-generator.git"
+  },
+  "dependencies": {
+    "canvas": "^2.11.2",
+    "axios": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.3.1",
+    "@types/axios": "^0.14.0",
+    "@typescript-eslint/eslint-plugin": "^5.43.0",
+    "eslint": "^8.28.0",
+    "eslint-config-standard-with-typescript": "^23.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.5.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "prettier": "^2.8.7",
+    "typescript": "^4.9.3"
   },
   "keywords": [
     "nodejs",

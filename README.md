@@ -1,13 +1,13 @@
 # nodejs-meme-generator
-Nodejs promise-based meme generator, it takes an image as url and top/bottom text to generate meme as Buffer
+TypeScript promise-based meme generator, it takes an image as url and top/bottom text to generate meme as Buffer
 
 ## Installation
 ```
-$ npm install nodejs-meme-generator
+$ npm install memise
 ```
 or
 ```
-$ yarn add nodejs-meme-generator
+$ yarn add memise
 ```
 
 ## Requirements
@@ -21,7 +21,7 @@ brew install pkg-config cairo pango libpng jpeg giflib
 const express = require('express');
 const app = express();
 const PORT = 3001;
-const memeLib = require('nodejs-meme-generator');
+const memeLib = require('memise');
 
 const memeGenerator = new memeLib({
   canvasOptions: { // optional
@@ -42,7 +42,7 @@ app.get('/', function (req, res) {
       topText: 'Meme',
       bottomText: 'Generator',
       // for local image you can use path 'img/folder/image.jpg'
-      url: 'https://i.imgur.com/7FHoSIG.png'
+      url: 'https://medialeaks.ru/wp-content/uploads/2020/07/global_yawning_by_woxys_dd4lh3m-pre-1-600x416.jpg'
     })
     .then(function(data) {
       res.set('Content-Type', 'image/png');
