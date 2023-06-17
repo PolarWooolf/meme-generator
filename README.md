@@ -1,4 +1,4 @@
-# nodejs-meme-generator
+# Memise
 TypeScript promise-based meme generator, it takes an image as url and top/bottom text to generate meme as Buffer
 
 ## Installation

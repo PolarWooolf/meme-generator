@@ -43,8 +43,8 @@ export default class MemeGenerator {
         },
         fontOptions: {
           fontFamily: 'impact',
-          fontSize: 46,
-          lineHeight: 2
+          fontSize: 32,
+          lineHeight: 1.2
         }
       },
       canvasOptions ? { canvasOptions } : null,
@@ -66,11 +66,6 @@ export default class MemeGenerator {
     this.canvas = canvas
     this.ctx = canvas.getContext('2d')
     this.canvasImg = new Image()
-
-    this.ctx.lineWidth = 2
-    this.ctx.strokeStyle = 'black'
-    this.ctx.fillStyle = 'white'
-    this.ctx.textAlign = 'center'
   }
 
   /**
@@ -114,9 +109,9 @@ export default class MemeGenerator {
 
       return this.canvas.toBuffer()
     } catch (e) {
-      const res = await axios.get(this.url)
-      if (res.request.statusCode === 200) {
-        this.canvasImg.src = Buffer.from(res.data)
+      const res = await axios.get(this.url, { responseType: 'arraybuffer' })
+      if (res.status === 200) {
+        this.canvasImg.src = Buffer.from(res.data, 'base64')
 
         this.calculateCanvasSize()
         this.drawMeme()
@@ -146,8 +141,7 @@ export default class MemeGenerator {
       topText,
       bottomText,
       fontSize,
-      ctx,
-      wrapText
+      ctx
     } = this
 
     ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -156,16 +150,21 @@ export default class MemeGenerator {
     const x = memeWidth / 2
     let y
 
+    this.ctx.lineWidth = 4
+    this.ctx.strokeStyle = 'black'
+    this.ctx.fillStyle = 'white'
+    this.ctx.textAlign = 'center'
+
     if (topText) {
       y = 0
       this.ctx.textBaseline = 'top'
-      wrapText(topText, x, y, false, fontSize)
+      this.wrapText(topText, x, y, false, fontSize)
     }
 
     if (bottomText) {
       y = memeHeight
       this.ctx.textBaseline = 'bottom'
-      wrapText(bottomText, x, y, true, fontSize)
+      this.wrapText(bottomText, x, y, true, fontSize)
     }
   }
 
@@ -213,7 +212,7 @@ export default class MemeGenerator {
     lines[pushMethod](line)
 
     if (lines.length > 2) {
-      MemeGenerator.prototype.wrapText(text, x, y, fromBottom, fontSize - 10)
+      this.wrapText(text, x, y, fromBottom, fontSize - 10)
     } else {
       lines.forEach((line, k) => {
         if (fromBottom) {
