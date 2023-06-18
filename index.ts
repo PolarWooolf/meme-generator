@@ -23,18 +23,18 @@ export interface MemeGeneratorOptions {
 }
 
 export default class MemeGenerator {
-  canvas!: Canvas
-  ctx!: CanvasRenderingContext2D
-  canvasImg!: Image
-  fontSize!: number
-  fontFamily!: string
-  fontWeight?: 'bold' | 'regular' | 'lighter' | 'bolder'
-  lineHeight!: number
-  topText!: string
-  bottomText!: string
-  url!: string
-  memeWidth!: number
-  memeHeight!: number
+  private canvas!: Canvas
+  private ctx!: CanvasRenderingContext2D
+  private canvasImg!: Image
+  private fontSize!: number
+  private fontFamily!: string
+  private fontWeight?: 'bold' | 'regular' | 'lighter' | 'bolder'
+  private lineHeight!: number
+  private topText!: string
+  private bottomText!: string
+  private url!: string
+  private memeWidth!: number
+  private memeHeight!: number
   constructor (userConfig: MemeGeneratorOptions = {}) {
     const { canvasOptions, fontOptions } = userConfig
     const config = Object.assign(
@@ -127,7 +127,7 @@ export default class MemeGenerator {
     }
   }
 
-  calculateCanvasSize (): void {
+  private calculateCanvasSize (): void {
     const { canvas, canvasImg } = this
 
     canvas.height = (canvasImg.height / canvasImg.width) * canvas.width
@@ -136,7 +136,7 @@ export default class MemeGenerator {
     this.memeHeight = canvas.height
   }
 
-  drawMeme (): void {
+  private drawMeme (): void {
     const {
       canvas,
       canvasImg,
@@ -180,7 +180,7 @@ export default class MemeGenerator {
    * @param {Boolean} fromBottom
    * @param {Number} fontSize
    */
-  wrapText (
+  private wrapText (
     text: string,
     x: number,
     y: number,

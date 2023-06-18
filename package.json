@@ -1,6 +1,6 @@
 {
   "name": "memise",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "author": "Sergey Zhirov <polarwolf@cstl.gg>",
   "license": "MIT",
   "description": "TS promise-based meme generator, it takes an image as url and top/bottom text to generate meme as Buffer",
