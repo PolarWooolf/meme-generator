@@ -9,6 +9,7 @@ export interface MemeGeneratorCanvasOptions {
 export interface MemeGeneratorFontOptions {
   fontSize: number
   fontFamily: string
+  fontWeight?: 'bold' | 'regular' | 'lighter' | 'bolder'
   lineHeight: number
 }
 export interface MemeGeneratorImageOptions {
@@ -27,6 +28,7 @@ export default class MemeGenerator {
   canvasImg!: Image
   fontSize!: number
   fontFamily!: string
+  fontWeight?: 'bold' | 'regular' | 'lighter' | 'bolder'
   lineHeight!: number
   topText!: string
   bottomText!: string
@@ -43,7 +45,8 @@ export default class MemeGenerator {
         },
         fontOptions: {
           fontFamily: 'impact',
-          fontSize: 32,
+          fontWeight: 'regular',
+          fontSize: 40,
           lineHeight: 1.2
         }
       },
@@ -73,9 +76,10 @@ export default class MemeGenerator {
    * @param {Object} options {fontFamily, fontSize, lineHeight}
    */
   setFontOptions (options: MemeGeneratorFontOptions): void {
-    const { fontFamily, fontSize, lineHeight } = options
+    const { fontFamily, fontSize, lineHeight, fontWeight } = options
 
     this.fontFamily = fontFamily
+    this.fontWeight = fontWeight
     this.fontSize = fontSize
     this.lineHeight = lineHeight
   }
@@ -150,7 +154,7 @@ export default class MemeGenerator {
     const x = memeWidth / 2
     let y
 
-    this.ctx.lineWidth = 4
+    this.ctx.lineWidth = this.fontSize * 0.2
     this.ctx.strokeStyle = 'black'
     this.ctx.fillStyle = 'white'
     this.ctx.textAlign = 'center'
@@ -187,7 +191,7 @@ export default class MemeGenerator {
       return
     }
 
-    this.ctx.font = `bold ${fontSize}pt ${this.fontFamily}`
+    this.ctx.font = `${this.fontWeight ?? 'regular'} ${fontSize}pt ${this.fontFamily}`
 
     const pushMethod = fromBottom ? 'unshift' : 'push'
     const lineHeight = this.lineHeight * fontSize
@@ -212,7 +216,7 @@ export default class MemeGenerator {
     lines[pushMethod](line)
 
     if (lines.length > 2) {
-      this.wrapText(text, x, y, fromBottom, fontSize - 10)
+      this.wrapText(text, x, y, fromBottom, fontSize * 0.8)
     } else {
       lines.forEach((line, k) => {
         if (fromBottom) {

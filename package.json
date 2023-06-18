@@ -1,6 +1,8 @@
 {
   "name": "memise",
-  "version": "2.0.1",
+  "version": "2.1.0",
+  "author": "Sergey Zhirov <polarwolf@cstl.gg>",
+  "license": "MIT",
   "description": "TS promise-based meme generator, it takes an image as url and top/bottom text to generate meme as Buffer",
   "main": "dist/index.js",
   "scripts": {
@@ -38,10 +40,9 @@
     "typescript": "^4.9.3"
   },
   "keywords": [
+    "typescript",
     "nodejs",
     "meme",
     "generator"
-  ],
-  "author": "TehZarathustra",
-  "license": "ISC"
+  ]
 }
